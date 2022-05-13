@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reviews</title>
+    <style>
+      .modal {
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .wrapper {
+        background-color: white;
+        padding: 10px 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 3px 3px #f4f4f4;
+        position: relative;
+      }
+      .wrapper p {
+      }
+      h2 {
+        text-align: center;
+      }
+      .close {
+        display: flex;
+        justify-content: flex-end;
+        position: absolute;
+        top: 0;
+        right: 20px;
+      }
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal hide">
+      <div class="wrapper">
+        <div class="close">
+          <p>X</p>
+        </div>
+        <h2>Review</h2>
+        <div>
+          <label for="">name</label>
+          <input type="text" id="name" />
+        </div>
+        <div>
+          <label for="">Email</label>
+
+          <input type="text" />
+        </div>
+        <div>
+          <input type="text" />
+        </div>
+        <button>Submit</button>
+      </div>
+    </div>
+    <main>
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Review</th>
+          <th>Rate</th>
+          <th>Date</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div>
+        <button class="add-review">Add review</button>
+      </div>
+    </main>
+    <script>
+      const get = (x) => document.querySelector(x);
+      const tbody = get("tbody");
+
+      fetch("/reviews")
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log(data);
+          let tr = "";
+          data.data.forEach((item, idx) => {
+            const line = item.split(",");
+            tr += ` <tr>
+            <td>${line[0]}</td>
+            <td>${line[1]}</td>
+            <td>This is nice</td>
+            <td>4</td>
+            <td>12/dec/2021</td>
+          </tr>`;
+          });
+          tbody.innerHTML = tr;
+        });
+      get(".add-review").addEventListener("click", () => {
+        get(".modal").classList.remove("hide");
+      });
+
+      get(".modal button").addEventListener("click", () => {
+        console.log(get("#name"));
+        const name = get("#name").value;
+        console.log(name);
+        fetch("/review", {
+          method: "POST",
+          body: JSON.stringify({ name: name }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

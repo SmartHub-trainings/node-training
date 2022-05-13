@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home </a>
+          </li>
+          <li>
+            <a href="/login">Login </a>
+          </li>
+          <li>
+            <a href="/register">Register </a>
+          </li>
+        </ul>
+      </nav>
+      <form action="">
+        <div>
+          <label for="">Email</label>
+          <input type="email" placeholder="Email" id="email" />
+        </div>
+        <div>
+          <label for="">Password</label>
+          <input type="password" placeholder="Password" id="password" />
+        </div>
+        <div>
+          <label for="">Confirm Password</label>
+          <input type="password" placeholder="Password" id="confirm-password" />
+        </div>
+        <button>Register</button>
+      </form>
+    </main>
+
+    <script>
+      const get = (x) => document.querySelector(x);
+
+      const emailHolder = get("#email");
+      const passHolder = get("#password");
+      const conPassHolder = get("#confirm-password");
+      get("button").addEventListener("click", (e) => {
+        e.preventDefault();
+        const email = emailHolder.value;
+        const password = passHolder.value;
+        const confirmPassword = conPassHolder.value;
+        const data = {
+          email,
+          password,
+          confirmPassword,
+        };
+        fetch("/register", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((resp) => resp.json())
+          .then((data) => console.log(data));
+      });
+    </script>
+  </body>
+</html>

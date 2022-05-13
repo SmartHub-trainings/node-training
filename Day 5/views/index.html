@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Port Folio</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: Heebo;
+      }
+      body {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      ul {
+        list-style-type: none;
+      }
+
+      .main-nav {
+        display: flex;
+        /* justify-content: space-evenly;
+        justify-content: space-around; */
+        justify-content: center;
+        column-gap: 40px;
+      }
+      a {
+        text-decoration: none;
+      }
+      .main-nav a {
+        text-transform: uppercase;
+        font-size: 0.66rem;
+        /* font-size: 1vw; */
+      }
+      .main-nav-wrapper {
+        background-color: white;
+        padding: 15px;
+      }
+      .main-nav li {
+        transition-duration: 0.6s;
+      }
+      .main-nav li:hover {
+        transform: scale(1.1);
+      }
+      .main-nav a:hover {
+        color: rgb(58, 77, 71);
+      }
+      .portfolio > ul {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .portfolio > ul > li {
+        margin-top: 50px;
+        height: 200px;
+        width: 200px;
+        background-color: white;
+      }
+
+      .padd-sides {
+        padding: 0px 10vw;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav-wrapper">
+        <ul class="main-nav">
+          <li>
+            <a href="">Home</a>
+          </li>
+          <li>
+            <a href="">Portfolio</a>
+          </li>
+          <li>
+            <a href="">Resume</a>
+          </li>
+          <li>
+            <a href="">About</a>
+          </li>
+          <li>
+            <a href="">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="portfolio padd-sides">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

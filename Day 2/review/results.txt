@@ -1,0 +1,2 @@
+Madam and none are palindrone?false
+Average of 45 and 50 is 47.5
