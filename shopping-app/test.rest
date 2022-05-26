@@ -1,0 +1,6 @@
+
+get http://localhost:6005/products
+
+###
+
+get http://localhost:6005/products/1

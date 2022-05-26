@@ -1,0 +1,4 @@
+get http://localhost:6005/posts
+
+###
+post http://localhost:6005/posts
