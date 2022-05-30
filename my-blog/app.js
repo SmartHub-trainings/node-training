@@ -1,13 +1,27 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { MONGO_URI, PORT } = require("./config/constants");
+const jwt = require("jsonwebtoken");
+
+// console.log(
+//   jwt.sign(
+//     { name: "Victor", email: "victor@gmail.com", occupation: "Womanizing" },
+//     "This is me",
+//     { expiresIn: "2d" }
+//   )
+// );
 const {
   getAllArticles,
   getAnArticle,
   updateAnArticle,
   createAnArticle,
 } = require("./controllers/articlesControllers");
-const { createNewUser } = require("./controllers/usersControllers");
+const {
+  createNewUser,
+  loginUser,
+  getAllUsers,
+} = require("./controllers/usersControllers");
+const { json } = require("express");
 
 const app = express();
 
@@ -31,6 +45,8 @@ app.post("/articles", createAnArticle);
 
 //users
 app.post("/users", createNewUser);
+app.post("/users/login", loginUser);
+app.get("/users", getAllUsers);
 
 app.listen(PORT, (err) => {
   if (err) {
