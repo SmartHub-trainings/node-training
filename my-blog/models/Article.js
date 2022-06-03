@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const ArticleSchema = new mongoose.Schema({
+const ArticleSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -18,9 +19,13 @@ const ArticleSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  // author: {
+  //   type: String,
+  //   default: "John Doe",
+  // },
   author: {
-    type: String,
-    default: "John Doe",
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
   createdAt: {
     type: Date,

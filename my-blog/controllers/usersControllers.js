@@ -13,39 +13,6 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const getAnArticle = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const article = await Article.findOneAndUpdate(
-      { _id: id },
-      { $inc: { views: 1 } },
-      { new: true }
-    );
-    return res.status(200).json(article);
-  } catch (error) {
-    console.error(error.message);
-    return res.send(error.message);
-  }
-};
-
-const updateAnArticle = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const body = req.body;
-    const article = await Article.findOneAndUpdate(
-      { _id: id },
-      { ...body, updatedAt: Date.now },
-      {
-        new: true,
-      }
-    );
-    return res.status(200).json(article);
-  } catch (error) {
-    console.error(error.message);
-    return res.send(error.message);
-  }
-};
-
 const createNewUser = async (req, res) => {
   try {
     const body = req.body;
@@ -82,11 +49,9 @@ const loginUser = async (req, res) => {
       .json({ error: { message: "Invalid email or password" } });
   }
   const token = jwt.sign({ _id: user._id }, constants.JWT_SECRET_KEY, {
-    expiresIn: "2d",
+    expiresIn: "1d",
   });
   return res.status(200).json({ user, token });
-
-  console.log(user);
 };
 
 module.exports = {

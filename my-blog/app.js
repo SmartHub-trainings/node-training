@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { MONGO_URI, PORT } = require("./config/constants");
 const jwt = require("jsonwebtoken");
+const userIsAuthenticated = require("./middlewares/userIsAuthenticated");
 
 // console.log(
 //   jwt.sign(
@@ -27,6 +28,10 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({}));
+app.use((req, res, next) => {
+  console.log("You got to me first");
+  next();
+});
 
 mongoose
   .connect(MONGO_URI)
@@ -40,8 +45,16 @@ mongoose
 //articles
 app.get("/articles", getAllArticles);
 app.get("/articles/:id", getAnArticle);
-app.put("/articles/:id", updateAnArticle);
-app.post("/articles", createAnArticle);
+app.put("/articles/:id", userIsAuthenticated, updateAnArticle);
+// app.post(
+//   "/articles",
+//   (req, res, next) => {
+//     console.log("You want to create an article");
+//     next();
+//   },
+//   createAnArticle
+// );
+app.post("/articles", userIsAuthenticated, createAnArticle);
 
 //users
 app.post("/users", createNewUser);

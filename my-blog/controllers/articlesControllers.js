@@ -1,4 +1,5 @@
 const Article = require("../models/Article");
+const User = require("../models/User");
 
 const getAllArticles = async (req, res) => {
   try {
@@ -44,8 +45,13 @@ const updateAnArticle = async (req, res) => {
 };
 
 const createAnArticle = async (req, res) => {
+  console.log(req);
   try {
+    // const user = await User.findOne({ _id: req.user._id });
     const body = req.body;
+    // body.author = user.lastName + " " + user.firstName;
+    body.author = req.user._id;
+
     const preArticle = new Article(body);
     const article = await preArticle.save();
     return res.json(article);
