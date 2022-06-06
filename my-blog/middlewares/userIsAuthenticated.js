@@ -6,7 +6,8 @@ module.exports = async (req, res, next) => {
     //   console.log(authorization);
     const token = authorization.split(" ")[1];
     const payload = jwt.verify(token, JWT_SECRET_KEY);
-    req.user=payload
+    console.log(payload);
+    req.user = payload;
     next();
   } catch (err) {
     return res.status(401).json({ error: { message: "Not authorized" } });

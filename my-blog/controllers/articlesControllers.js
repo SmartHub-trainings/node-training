@@ -45,7 +45,7 @@ const updateAnArticle = async (req, res) => {
 };
 
 const createAnArticle = async (req, res) => {
-  console.log(req);
+  // console.log(req);
   try {
     // const user = await User.findOne({ _id: req.user._id });
     const body = req.body;
