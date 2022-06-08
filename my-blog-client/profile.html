@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+    <script src="./assets/js/constants.js" defer></script>
+    <script src="./assets/js/create-article.js" defer></script>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h1>Profile</h1>
+      <div class="profile-container">
+        <section>
+          <div class="avatar-wrapper">
+            <p class="avatar">GB</p>
+          </div>
+          <div>
+            <div><span>Name: </span> <span>George Smith</span></div>
+          </div>
+          <div>
+            <div><span>Email: </span> <span>george@gmail.com</span></div>
+          </div>
+        </section>
+        <section>
+          <div class="">
+            <div class="create-article-form">
+              <h2>Create new Article</h2>
+              <form>
+                <fieldset>
+                  <label for="title">Title</label>
+                  <input type="text" class="title" />
+                </fieldset>
+                <fieldset>
+                  <!-- <legend>Passord</legend> -->
+                  <label for="category">Category</label>
+                  <select name="category" id="" class="category">
+                    <option value="-1">Select</option>
+                    <option value="Health">Health</option>
+                    <option value="Fashion">Fashion</option>
+                  </select>
+                </fieldset>
+                <fieldset>
+                  <label for="content">Content</label>
+                  <textarea
+                    name=""
+                    class="content"
+                    cols="30"
+                    rows="10"
+                  ></textarea>
+                </fieldset>
+                <button id="create-article">Create Article</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

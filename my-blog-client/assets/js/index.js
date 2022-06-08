@@ -5,9 +5,9 @@
 
 async function getArticles() {
   try {
-    const res = await fetch("http://localhost:6005/articles");
+    const res = await fetch("http://localhost:6005/articles?limit=10&page=1");
     const data = await res.json();
-
+    get(".loader").style.display = "none";
     return data;
   } catch (error) {
     console.log(error);

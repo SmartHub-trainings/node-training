@@ -20,8 +20,9 @@ async function login(e) {
   const data = { email, password };
   console.log(data);
   const body = await authLog(data);
-  console.log(body);
-  // localStorage.setItem("token", body.token);
+  // console.log(body);/
+  localStorage.setItem("token", body.token);
+  location.href = "http://127.0.0.1:5500/trainings/my-blog-client/profile.html";
 }
 
 get("button").addEventListener("click", login);
