@@ -22,6 +22,7 @@ const {
   createNewUser,
   loginUser,
   getAllUsers,
+  getAUser,
 } = require("./controllers/usersControllers");
 const { json } = require("express");
 
@@ -61,6 +62,8 @@ app.post("/articles", userIsAuthenticated, createAnArticle);
 
 //users
 app.post("/users", createNewUser);
+app.get("/users/a-user", userIsAuthenticated, getAUser);
+
 app.post("/users/login", loginUser);
 app.get("/users", getAllUsers);
 

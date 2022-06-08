@@ -1,9 +1,20 @@
 const Article = require("../models/Article");
-const User = require("../models/User");
+const Joi = require("joi");
+
+const Schema = Joi.object({
+  title: Joi.string().required(),
+  category: Joi.string().required(),
+  content: Joi.string().optional(),
+});
 
 const getAllArticles = async (req, res) => {
+  console.log(req.query);
+  const { limit } = req.query;
   try {
-    const articles = await Article.find({});
+    // const articles = await Article.find({}).sort({ createdAt: -1 });
+    const articles = await Article.find({})
+      .sort({ title: 1 })
+      .limit(limit * 1);
     return res.status(200).json(articles);
   } catch (error) {
     console.error(error.message);
@@ -47,6 +58,12 @@ const updateAnArticle = async (req, res) => {
 const createAnArticle = async (req, res) => {
   // console.log(req);
   try {
+    const { error, value } = Schema.validate(req.body);
+    if (error) {
+      return res
+        .status(400)
+        .json({ error: { message: error.details[0].message } });
+    }
     // const user = await User.findOne({ _id: req.user._id });
     const body = req.body;
     // body.author = user.lastName + " " + user.firstName;

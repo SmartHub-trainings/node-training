@@ -12,13 +12,45 @@ const getAllUsers = async (req, res) => {
     return res.send(error.message);
   }
 };
+const getAUser = async (req, res) => {
+  try {
+    const _id = req.user._id;
+    const user = await User.findOne({ _id });
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error(error.message);
+    return res.send(error.message);
+  }
+};
 
 const createNewUser = async (req, res) => {
   try {
     const body = req.body;
+    // if (!body.firstName) {
+    //   return res.status(400).json({
+    //     error: { message: "First Name Is required" },
+    //   });
+    // }
+    // if (!body.lastName) {
+    //   return res.status(400).json({
+    //     error: { message: "Last Name Is required" },
+    //   });
+    // }
+    if (!body.firstName || !body.lastName || !body.email) {
+      return res.status(400).json({
+        error: { message: "All fields are required" },
+      });
+    }
     if (body.password !== body.confirmPassword) {
       return res.status(400).json({
         error: { message: "Password and confirm password must match" },
+      });
+    }
+
+    const aUser = await User.findOne({ email: body.email });
+    if (aUser) {
+      return res.status(400).json({
+        error: { message: "Email Alraady Exist" },
       });
     }
     const newPassword = await hash(body.password, 10);
@@ -50,7 +82,7 @@ const loginUser = async (req, res) => {
         .json({ error: { message: "Invalid email or password" } });
     }
     const token = jwt.sign({ _id: user._id }, constants.JWT_SECRET_KEY, {
-      expiresIn: "2m",
+      expiresIn: "10m",
     });
     return res.status(200).json({ user, token });
   } catch (error) {
@@ -62,4 +94,5 @@ module.exports = {
   createNewUser,
   loginUser,
   getAllUsers,
+  getAUser,
 };
