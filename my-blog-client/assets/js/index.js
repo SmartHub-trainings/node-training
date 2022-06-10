@@ -1,11 +1,14 @@
 // fetch("http://localhost:6005/articles")
 //   .then((res) => res.json())
 //   .then((data) => console.log(data))
+
 //   .catch((err) => console.log(err));
 
-async function getArticles() {
+async function getArticles(page) {
   try {
-    const res = await fetch("http://localhost:6005/articles?limit=10&page=1");
+    const res = await fetch(
+      "http://localhost:6005/articles?limit=10&page=" + page
+    );
     const data = await res.json();
     get(".loader").style.display = "none";
     return data;
@@ -14,11 +17,12 @@ async function getArticles() {
   }
 }
 
-async function main() {
-  const data = await getArticles();
+async function main(page) {
+  const data = await getArticles(page);
+  console.log(data);
   const ul = get("ul");
   let li = "";
-  data.forEach((article, idx) => {
+  data.data.forEach((article, idx) => {
     li =
       li +
       `  <li>
@@ -32,7 +36,15 @@ async function main() {
           </div>
         </li>`;
   });
+  li = li + "<button style='margin-top:50px;' id='next'>Next</button>";
   ul.innerHTML = li;
+  get("#next").addEventListener("click", () => {
+    if (page + 1 <= data.pages) {
+      page = page + 1;
+
+      main(page);
+    }
+  });
   getAll("a").forEach((tag) => {
     console.log("this");
     tag.addEventListener("click", (e) => {
@@ -45,4 +57,4 @@ async function main() {
   });
 }
 
-main();
+main(1);

@@ -7,21 +7,6 @@ const Schema = Joi.object({
   content: Joi.string().optional(),
 });
 
-const getAllArticles = async (req, res) => {
-  console.log(req.query);
-  const { limit } = req.query;
-  try {
-    // const articles = await Article.find({}).sort({ createdAt: -1 });
-    const articles = await Article.find({})
-      .sort({ title: 1 })
-      .limit(limit * 1);
-    return res.status(200).json(articles);
-  } catch (error) {
-    console.error(error.message);
-    return res.send(error.message);
-  }
-};
-
 const getAnArticle = async (req, res) => {
   try {
     const id = req.params.id;
@@ -79,7 +64,6 @@ const createAnArticle = async (req, res) => {
 };
 
 module.exports = {
-  getAllArticles,
   getAnArticle,
   updateAnArticle,
   createAnArticle,
