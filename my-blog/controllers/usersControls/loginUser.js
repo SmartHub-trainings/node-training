@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         .json({ error: { message: "Invalid email or password" } });
     }
     const token = jwt.sign({ _id: user._id }, constants.JWT_SECRET_KEY, {
-      expiresIn: "10m",
+      expiresIn: "60m",
     });
     return res.status(200).json({ user, token });
   } catch (error) {

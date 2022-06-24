@@ -1,9 +1,12 @@
+const addNewArticle = require("../controllers/articlesControls/addNewArticle");
 const getAllArticles = require("../controllers/articlesControls/getAllArticles");
+const upload = require("../middlewares/upload");
+const userIsAuthenticated = require("../middlewares/userIsAuthenticated");
 
 const router = require("express").Router();
 
 router.get("/", getAllArticles);
-// router.get("/articles/:id", getAnArticle);
+router.post("/", userIsAuthenticated, upload.single("photo"), addNewArticle);
 // router.put("/articles/:id", userIsAuthenticated, updateAnArticle);
 
 // // router.post(

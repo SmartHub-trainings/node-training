@@ -31,6 +31,9 @@ const ArticleSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  imageURL: {
+    type: String,
+  },
   updatedAt: {
     type: Date,
     default: Date.now,
